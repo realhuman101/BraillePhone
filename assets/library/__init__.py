@@ -7,7 +7,7 @@ class Controller:
 		self.simulated = simulated
 
 		if simulated:
-			import RPi.GPIO as GPIO
+			import RPi.GPIO as GPIO # Import (otherwise will fail) only if on raspberry pi
 
 	def text2braille(self, text: str) -> list[bool]:
 		"""
