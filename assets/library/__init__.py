@@ -13,10 +13,19 @@ class Controller:
 		Converts string to a 2D list with each nested element containing 6 elements, each corresponding to a pin
 
 		The pins will be in the format where the dots correspond to the 1-2-3-4-5-6 pattern, with 1 and 2 being the top 2 from left to right, 3 and 4 being the middle two from left to right, etc. 
+
+		A full string would contain multiple lists within itself, each list being a character and containing 6 Booleans.
 		
 		I.e:
 		[True, False, False, True, True, False] forms the letter O
 		"""
+
+		characterList = {
+			'a': [True, False, False, False, False, False],
+			'b': [True, False, True, False, False, False],
+			'c': [True, True, False, False, False, False],
+			'd': [True, True, False, True, False, False]
+		}
 
 	def get_pwm(self, angle):
 		return (angle/18.0) + 2.5
