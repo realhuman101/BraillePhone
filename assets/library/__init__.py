@@ -54,9 +54,9 @@ class Controller:
 			GPIO.setup(15, GPIO.OUT)
 
 			# Set up pins
-			TopPin = GPIO.PWM(11, GPIO.OUT) # Top servo
-			MiddlePin = GPIO.PWM(13, GPIO.OUT) # Middle
-			BottomPin = GPIO.PWM(15, GPIO.OUT) # Bottom
+			TopPin = GPIO.PWM(11, 0) # Top servo
+			MiddlePin = GPIO.PWM(13, 0) # Middle
+			BottomPin = GPIO.PWM(15, 0) # Bottom
 
 			TopPin.start(0)
 			MiddlePin.start(0)
