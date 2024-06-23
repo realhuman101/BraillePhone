@@ -18,24 +18,20 @@ class Controller:
 		[True, False, False, True, True, False] forms the letter O
 		"""
 
-	def ConvertRadsInPulseWidth(self, angle):
-		"""
-		thanks to https://raspberrypi.stackexchange.com/a/112989
-		"""
-		everyRadianInPulseWidth = 439.267642
-		rounded = "{:.10f}".format(float(angle))
-		pulseWithFromRadians = (everyRadianInPulseWidth * float(rounded))
+	def get_pwm(self, angle):
+		return (angle/18.0) + 2.5
 
-		moveFromCentre = 1435 + pulseWithFromRadians
 
-		return moveFromCentre
-
-	def output(self, text: str) -> None:
+	def output(self, text: str, waitTime: int = 30, singleDegree: float = 45.00) -> None:
 		"""
 		Outputs the text (will auto-convert to braille) to the pins
 		"""
 
 		braille = self.text2braille(text)
+		brailleSep = []
+
+		for character in braille:
+			brailleSep.append([(character[0], character[1]), (character[2], character[3]), (character[4], character[5])])
 
 		if not self.simulated:
 			import RPi.GPIO as GPIO
@@ -57,3 +53,40 @@ class Controller:
 			MiddlePin.start(0)
 			BottomPin.start(0)
 
+			for character in brailleSep:
+				top = character[0]
+				middle = character[1]
+				bottom = character[2]
+
+				# Setting top pins
+				if top[0] and top[1]:
+					TopPin.ChangeDutyCycle(self.get_pwm(0))
+				elif top[0] and not top[1]:
+					TopPin.ChangeDutyCycle(self.get_pwm(-singleDegree))
+				elif not top[0] and top[1]:
+					TopPin.ChangeDutyCycle(self.get_pwm(singleDegree))
+				
+				# Setting middle pins
+				if middle[0] and middle[1]:
+					MiddlePin.ChangeDutyCycle(self.get_pwm(0))
+				elif middle[0] and not middle[1]:
+					MiddlePin.ChangeDutyCycle(self.get_pwm(-singleDegree))
+				elif not middle[0] and middle[1]:
+					MiddlePin.ChangeDutyCycle(self.get_pwm(singleDegree))
+
+				# Setting bottom pins
+				if bottom[0] and bottom[1]:
+					BottomPin.ChangeDutyCycle(self.get_pwm(0))
+				elif bottom[0] and not bottom[1]:
+					BottomPin.ChangeDutyCycle(self.get_pwm(-singleDegree))
+				elif not bottom[0] and bottom[1]:
+					BottomPin.ChangeDutyCycle(self.get_pwm(singleDegree))
+				
+				time.sleep(waitTime)
+			
+			# End connection
+			TopPin.stop()
+			MiddlePin.stop()
+			BottomPin.stop()
+
+			GPIO.cleanup()
