@@ -85,5 +85,3 @@ class Controller:
 			TopPin.stop()
 			MiddlePin.stop()
 			BottomPin.stop()
-
-			GPIO.cleanup()
