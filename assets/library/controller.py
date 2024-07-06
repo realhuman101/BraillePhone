@@ -66,6 +66,11 @@ class Controller:
 	def output(self, text: str, waitTime: int = 0.5) -> None:
 		"""
 		Outputs the text (will auto-convert to braille) to the pins
+
+		This is achieved by connecting the Raspberry Pi to the Arduino Uno which will in turn control the servos
+
+		Why not directly control the servos? Well we simply couldn't figure out how to do it. 
+		After trial and error, we gave up and opted for the easier current solution.
 		"""
 
 		braille = self.text2braille(text)
