@@ -57,6 +57,20 @@ void rotateServo(Servo selServo, int pos) {
     Servo selServo = Selected servo to rotate
     int pos = Position (varying from 1-3) to move in, where 1 is left, 2 is middle and 3 is right 
   */
+
+  if (pos == 2) { // Middle
+  
+    selServo.write(90);
+
+  } else if (pos == 1) { // Left
+
+    selServo.write(75);
+
+  } else if (pos == 3) { // Right
+
+    selServo.write(105);
+
+  }
 }
 
 // Input to movement conversion function
