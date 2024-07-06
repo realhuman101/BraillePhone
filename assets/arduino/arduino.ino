@@ -20,6 +20,13 @@ const int btmPin = 10;
   A4,A5 are reserved for the bottom servo
 */
 
+// Other constants
+const int minVoltage = 3.3; // Minimum amt of volts to be considered as voltage produced
+
+const int leftDeg = 75; // Degrees in the left position
+const int midDeg = 90; // Degrees in the middle position
+const int rightDeg = 105; // Degrees in the right position
+
 // FUNCTIONS
 // Main functions
 void setup() {
@@ -60,15 +67,15 @@ void rotateServo(Servo selServo, int pos) {
 
   if (pos == 2) { // Middle
   
-    selServo.write(90);
+    selServo.write(midDeg);
 
   } else if (pos == 1) { // Left
 
-    selServo.write(75);
+    selServo.write(leftDeg);
 
   } else if (pos == 3) { // Right
 
-    selServo.write(105);
+    selServo.write(rightDeg);
 
   }
 }
@@ -81,15 +88,15 @@ void movementHandler(float pin1, float pin2, Servo selServo) {
     Servo selServo = Selected servo
   */
 
-  if (pin1 >= 5 && pin2 >= 5) { // Middle
+  if (pin1 >= minVoltage && pin2 >= minVoltage) { // Middle
 
     rotateServo(selServo, 2);
 
-  } else if (pin1 >= 5) { // Left
+  } else if (pin1 >= minVoltage) { // Left
 
     rotateServo(selServo, 1);
 
-  } else if (pin2 >= 5) { // Top
+  } else if (pin2 >= minVoltage) { // Top
 
     rotateServo(selServo, 3); 
 
