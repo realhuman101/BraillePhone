@@ -55,7 +55,7 @@ pip3 install -r requirements.txt
 
 ### Project Installation
 
-To install the project, either `git clone` the repository or download the ZIP file with the green `code` button above.
+To install the project, either `git clone` the repository or download the ZIP file with the green `code` button above. See the [usage](#usage) section for more information.
 
 ## Usage
 
