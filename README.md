@@ -39,7 +39,9 @@ The scope of our project extends to the wider community for anyone who is visual
 
 ### Requirement Installation
 
-To install the required Python packages, run the following command:
+Make sure to install Python3 and pip3 on your Raspberry Pi.
+
+To install the required Python packages, run the following command **on the Raspberry Pi**:
 
 ```shell
 pip install -r requirements.txt
