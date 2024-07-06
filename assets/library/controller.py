@@ -8,6 +8,11 @@ class Controller:
 
 		self.simulated = simulated
 
+		# Setting pins
+		self.TOP = (2,3)
+		self.MID = (4,17)
+		self.BTM = (27,22)
+
 	def text2braille(self, text: str) -> list[list[bool]]:
 		"""
 		Converts string to a 2D list with each nested element containing 6 elements, each corresponding to a pin
@@ -81,3 +86,46 @@ class Controller:
 
 		if not self.simulated:
 			from RPi import GPIO
+
+			"""
+			Notice:
+
+			Using GPIO pins 2,3,4,17,27,22
+			Check up Raspberry Pi Pin Layout sheet for more information
+			
+			2,3 = Top
+			4,17 = Middle
+			27,22 = Bottom
+			"""
+
+			for brailleTxt in brailleSep:
+				# Top
+				topBraille = brailleTxt[0]
+				GPIO.output(self.TOP[0], topBraille[0])
+				GPIO.output(self.TOP[1], topBraille[1])
+
+				# Middle
+				midBraille = brailleTxt[1]
+				GPIO.output(self.MID[0], midBraille[0])
+				GPIO.output(self.MID[1], midBraille[1])
+
+				# Bottom
+				btmBraille = brailleTxt[2]
+				GPIO.output(self.BTM[0], btmBraille[0])
+				GPIO.output(self.BTM[1], btmBraille[1])
+
+				# Sleep
+				sleep(waitTime)
+	
+	def reset(self) -> None:
+		if not self.simulated:
+			from RPi import GPIO
+
+			GPIO.output(self.TOP[0], False)
+			GPIO.output(self.TOP[1], False)
+
+			GPIO.output(self.MID[0], False)
+			GPIO.output(self.MID[1], False)
+			
+			GPIO.output(self.BTM[0], False)
+			GPIO.output(self.BTM[1], False)
