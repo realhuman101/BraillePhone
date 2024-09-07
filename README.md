@@ -27,6 +27,9 @@ Our project aims to assist the blind by providing them access to modern-day tech
 The scope of our project extends to the wider community for anyone who is visually impaired and is unable to access the benefits of a common smartphone. The Braille smartphone implements the Braille language to create a model of the smartphone which can be used by blind or partially blind members of our community. Hence, anyone who lacks the visual ability to use the smartphone and is relying on Braille to communicate is a key stakeholder and part of our clientele.
 
 > Please also note that this is still a ***work in progress*** and is not yet complete.
+>
+
+![Image](assets/images/BPhone.png)
 
 ## Requirements
 
